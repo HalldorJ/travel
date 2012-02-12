@@ -1,0 +1,37 @@
+﻿@model IEnumerable<travel.Users>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index users</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+
+
+@foreach (var user in Model) {
+    
+     <tr><th colspan="2"> 
+         @user.UserName 
+     </th></tr>
+    
+foreach (var item in user.Trip)
+{
+    
+    <tr>
+        <td>
+         @Html.ActionLink(item.Name, "Details", new { id = item.IDTrip }) 
+        </td>
+          <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.IDTrip }) |
+            @Html.ActionLink("Details", "Details", new { id = item.IDTrip }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IDTrip })
+        </td>
+    </tr>
+}
+    
+}
+</table>

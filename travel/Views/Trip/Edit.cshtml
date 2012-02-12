@@ -1,0 +1,115 @@
+﻿@model travel.Trip
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Trip</legend>
+
+        @Html.HiddenFor(model => model.IDTrip)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Description, new { @class = "tinymce" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Minimum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Minimum)
+            @Html.ValidationMessageFor(model => model.Minimum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PickupTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PickupTime)
+            @Html.ValidationMessageFor(model => model.PickupTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Duration)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Duration)
+            @Html.ValidationMessageFor(model => model.Duration)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Operation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Operation)
+            @Html.ValidationMessageFor(model => model.Operation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Includes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Includes)
+            @Html.ValidationMessageFor(model => model.Includes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddInfo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddInfo)
+            @Html.ValidationMessageFor(model => model.AddInfo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDLanguage)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDLanguage)
+            @Html.ValidationMessageFor(model => model.IDLanguage)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserId)
+            @Html.ValidationMessageFor(model => model.UserId)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<travel.Models.UserWithTrips>
+
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table>
+
+@foreach (var user in Model) {
+    <tr>
+        <th colspan="2">
+            @Html.DisplayFor(modelItem => user.User.UserName)
+        </th>
+    </tr>
+    foreach (var trip in user.Trips)
+    {
+        <tr>
+        <td>
+            @Html.DisplayFor(modelItem => trip.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = trip.IDTrip }) |
+            @Html.ActionLink("Details", "Details", new { id = trip.IDTrip }) |
+            @Html.ActionLink("Delete", "Delete", new { id = trip.IDTrip })
+        </td>
+    </tr>
+    }
+}
+
+</table>

@@ -1,0 +1,690 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="aspnetModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="aspnetModelStoreContainer">
+          <EntitySet Name="Applications" EntityType="aspnetModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Driver" EntityType="aspnetModel.Store.Driver" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Language" EntityType="aspnetModel.Store.Language" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Memberships" EntityType="aspnetModel.Store.Memberships" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Profiles" EntityType="aspnetModel.Store.Profiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="aspnetModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="aspnetModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Trip" EntityType="aspnetModel.Store.Trip" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TripType" EntityType="aspnetModel.Store.TripType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="aspnetModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UsersInRoles" EntityType="aspnetModel.Store.UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Trip_Users" Association="aspnetModel.Store.FK_Trip_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipApplication" Association="aspnetModel.Store.MembershipApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="aspnetModel.Store.MembershipUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="aspnetModel.Store.RoleApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserApplication" Association="aspnetModel.Store.UserApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="aspnetModel.Store.UserProfile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoleRole" Association="aspnetModel.Store.UsersInRoleRole">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoleUser" Association="aspnetModel.Store.UsersInRoleUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="235" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="IDDriver" />
+          </Key>
+          <Property Name="IDDriver" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="IDLanguage" />
+          </Key>
+          <Property Name="IDLanguage" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyNames" Type="nvarchar" Nullable="false" />
+          <Property Name="PropertyValueStrings" Type="nvarchar" Nullable="false" />
+          <Property Name="PropertyValueBinary" Type="image" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="IDTrip" />
+          </Key>
+          <Property Name="IDTrip" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDTripType" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Minimum" Type="nvarchar" MaxLength="150" />
+          <Property Name="PickupTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="100" />
+          <Property Name="Operation" Type="nvarchar" MaxLength="100" />
+          <Property Name="Includes" Type="nvarchar" MaxLength="150" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddInfo" Type="nvarchar(max)" />
+          <Property Name="IDLanguage" Type="int" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="TripType">
+          <Key>
+            <PropertyRef Name="IDTripType" />
+          </Key>
+          <Property Name="IDTripType" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Trip_Users">
+          <End Role="Users" Type="aspnetModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Trip" Type="aspnetModel.Store.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipApplication">
+          <End Role="Applications" Type="aspnetModel.Store.Applications" Multiplicity="1" />
+          <End Role="Memberships" Type="aspnetModel.Store.Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipUser">
+          <End Role="Users" Type="aspnetModel.Store.Users" Multiplicity="1" />
+          <End Role="Memberships" Type="aspnetModel.Store.Memberships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleApplication">
+          <End Role="Applications" Type="aspnetModel.Store.Applications" Multiplicity="1" />
+          <End Role="Roles" Type="aspnetModel.Store.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserApplication">
+          <End Role="Applications" Type="aspnetModel.Store.Applications" Multiplicity="1" />
+          <End Role="Users" Type="aspnetModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfile">
+          <End Role="Users" Type="aspnetModel.Store.Users" Multiplicity="1" />
+          <End Role="Profiles" Type="aspnetModel.Store.Profiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoleRole">
+          <End Role="Roles" Type="aspnetModel.Store.Roles" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="aspnetModel.Store.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoleUser">
+          <End Role="Users" Type="aspnetModel.Store.Users" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="aspnetModel.Store.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="aspnetModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="aspnetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="aspnetModel.Applications" />
+          <EntitySet Name="Driver" EntityType="aspnetModel.Driver" />
+          <EntitySet Name="Language" EntityType="aspnetModel.Language" />
+          <EntitySet Name="Memberships" EntityType="aspnetModel.Memberships" />
+          <EntitySet Name="Profiles" EntityType="aspnetModel.Profiles" />
+          <EntitySet Name="Roles" EntityType="aspnetModel.Roles" />
+          <EntitySet Name="Trip" EntityType="aspnetModel.Trip" />
+          <EntitySet Name="Users" EntityType="aspnetModel.Users" />
+          <AssociationSet Name="MembershipApplication" Association="aspnetModel.MembershipApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="aspnetModel.RoleApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserApplication" Association="aspnetModel.UserApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="aspnetModel.MembershipUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="aspnetModel.UserProfile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoles" Association="aspnetModel.UsersInRoles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="aspnetModel.sysdiagrams" />
+          <AssociationSet Name="FK_Trip_Users" Association="aspnetModel.FK_Trip_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <EntitySet Name="TripType" EntityType="aspnetModel.TripType" />
+        </EntityContainer>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="String" Nullable="false" MaxLength="235" Unicode="true" FixedLength="false" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Memberships" Relationship="aspnetModel.MembershipApplication" FromRole="Applications" ToRole="Memberships" />
+          <NavigationProperty Name="Roles" Relationship="aspnetModel.RoleApplication" FromRole="Applications" ToRole="Roles" />
+          <NavigationProperty Name="Users" Relationship="aspnetModel.UserApplication" FromRole="Applications" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="IDDriver" />
+          </Key>
+          <Property Name="IDDriver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="IDLanguage" />
+          </Key>
+          <Property Name="IDLanguage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Language1" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="DateTime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Applications" Relationship="aspnetModel.MembershipApplication" FromRole="Memberships" ToRole="Applications" />
+          <NavigationProperty Name="Users" Relationship="aspnetModel.MembershipUser" FromRole="Memberships" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyNames" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="PropertyValueStrings" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="PropertyValueBinary" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="aspnetModel.UserProfile" FromRole="Profiles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Applications" Relationship="aspnetModel.RoleApplication" FromRole="Roles" ToRole="Applications" />
+          <NavigationProperty Name="Users" Relationship="aspnetModel.UsersInRoles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="IDTrip" />
+          </Key>
+          <Property Name="IDTrip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Minimum" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="PickupTime" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Duration" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Operation" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Includes" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AddInfo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IDLanguage" Type="Int32" />
+          <Property Type="Guid" Name="UserId" />
+          <NavigationProperty Name="Users" Relationship="aspnetModel.FK_Trip_Users" FromRole="Trip" ToRole="Users" />
+          <Property Type="Int32" Name="IDTripType" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="aspnetModel.UserApplication" FromRole="Users" ToRole="Applications" />
+          <NavigationProperty Name="Memberships" Relationship="aspnetModel.MembershipUser" FromRole="Users" ToRole="Memberships" />
+          <NavigationProperty Name="Profiles" Relationship="aspnetModel.UserProfile" FromRole="Users" ToRole="Profiles" />
+          <NavigationProperty Name="Roles" Relationship="aspnetModel.UsersInRoles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Trip" Relationship="aspnetModel.FK_Trip_Users" FromRole="Users" ToRole="Trip" />
+        </EntityType>
+        <Association Name="MembershipApplication">
+          <End Role="Applications" Type="aspnetModel.Applications" Multiplicity="1" />
+          <End Role="Memberships" Type="aspnetModel.Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleApplication">
+          <End Role="Applications" Type="aspnetModel.Applications" Multiplicity="1" />
+          <End Role="Roles" Type="aspnetModel.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserApplication">
+          <End Role="Applications" Type="aspnetModel.Applications" Multiplicity="1" />
+          <End Role="Users" Type="aspnetModel.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipUser">
+          <End Role="Users" Type="aspnetModel.Users" Multiplicity="1" />
+          <End Role="Memberships" Type="aspnetModel.Memberships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfile">
+          <End Role="Users" Type="aspnetModel.Users" Multiplicity="1" />
+          <End Role="Profiles" Type="aspnetModel.Profiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoles">
+          <End Role="Roles" Type="aspnetModel.Roles" Multiplicity="*" />
+          <End Role="Users" Type="aspnetModel.Users" Multiplicity="*" />
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Trip_Users">
+          <End Type="aspnetModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="aspnetModel.Trip" Role="Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TripType">
+          <Key>
+            <PropertyRef Name="IDTripType" />
+          </Key>
+          <Property Type="Int32" Name="IDTripType" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="aspnetModelStoreContainer" CdmEntityContainer="aspnetEntities">
+          <EntitySetMapping Name="Applications"><EntityTypeMapping TypeName="aspnetModel.Applications"><MappingFragment StoreEntitySet="Applications">
+            <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+            <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Driver"><EntityTypeMapping TypeName="aspnetModel.Driver"><MappingFragment StoreEntitySet="Driver">
+            <ScalarProperty Name="IDDriver" ColumnName="IDDriver" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Language"><EntityTypeMapping TypeName="aspnetModel.Language"><MappingFragment StoreEntitySet="Language">
+            <ScalarProperty Name="IDLanguage" ColumnName="IDLanguage" />
+            <ScalarProperty Name="Language1" ColumnName="Language" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Memberships"><EntityTypeMapping TypeName="aspnetModel.Memberships"><MappingFragment StoreEntitySet="Memberships">
+            <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+            <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+            <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+            <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+            <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+            <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+            <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+            <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+            <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+            <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+            <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+            <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+            <ScalarProperty Name="Comment" ColumnName="Comment" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Profiles"><EntityTypeMapping TypeName="aspnetModel.Profiles"><MappingFragment StoreEntitySet="Profiles">
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+            <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
+            <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
+            <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Roles"><EntityTypeMapping TypeName="aspnetModel.Roles"><MappingFragment StoreEntitySet="Roles">
+            <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+            <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Trip"><EntityTypeMapping TypeName="aspnetModel.Trip"><MappingFragment StoreEntitySet="Trip">
+            <ScalarProperty Name="IDTripType" ColumnName="IDTripType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IDTrip" ColumnName="IDTrip" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Minimum" ColumnName="Minimum" />
+            <ScalarProperty Name="PickupTime" ColumnName="PickupTime" />
+            <ScalarProperty Name="Duration" ColumnName="Duration" />
+            <ScalarProperty Name="Operation" ColumnName="Operation" />
+            <ScalarProperty Name="Includes" ColumnName="Includes" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+            <ScalarProperty Name="AddInfo" ColumnName="AddInfo" />
+            <ScalarProperty Name="IDLanguage" ColumnName="IDLanguage" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="aspnetModel.Users"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+            <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="UsersInRoles" TypeName="aspnetModel.UsersInRoles" StoreEntitySet="UsersInRoles">
+            <EndProperty Name="Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="aspnetModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripType">
+            <EntityTypeMapping TypeName="aspnetModel.TripType">
+              <MappingFragment StoreEntitySet="TripType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDTripType" ColumnName="IDTripType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TravelEntity">
+        <EntityTypeShape EntityType="aspnetModel.Applications" Width="1.5" PointX="0.75" PointY="4.5" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="aspnetModel.Driver" Width="1.5" PointX="2.875" PointY="0.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="aspnetModel.Language" Width="1.5" PointX="0.75" PointY="0.75" Height="1.4033821614583326" IsExpanded="true" />
+        <EntityTypeShape EntityType="aspnetModel.Memberships" Width="1.5" PointX="3" PointY="3" Height="5.0571093749999987" IsExpanded="true" />
+        <EntityTypeShape EntityType="aspnetModel.Profiles" Width="1.5" PointX="7.5" PointY="7.375" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="aspnetModel.Roles" Width="1.5" PointX="3" PointY="10.25" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="aspnetModel.Trip" Width="1.5" PointX="4.875" PointY="0.875" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="aspnetModel.Users" Width="1.5" PointX="5.25" PointY="5.75" Height="2.9417936197916674" IsExpanded="true" />
+        <AssociationConnector Association="aspnetModel.MembershipApplication" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.5862939453125" />
+          <ConnectorPoint PointX="3" PointY="5.5862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="aspnetModel.RoleApplication" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="6.672587890625" />
+          <ConnectorPoint PointX="1.5" PointY="11.3362939453125" />
+          <ConnectorPoint PointX="3" PointY="11.3362939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="aspnetModel.UserApplication" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.9062525" PointY="6.672587890625" />
+          <ConnectorPoint PointX="1.9062525" PointY="8.4057014973958335" />
+          <ConnectorPoint PointX="5.25" PointY="8.4057014973958335" />
+        </AssociationConnector>
+        <AssociationConnector Association="aspnetModel.MembershipUser" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="6.9035546875" />
+          <ConnectorPoint PointX="4.5" PointY="6.9035546875" />
+        </AssociationConnector>
+        <AssociationConnector Association="aspnetModel.UserProfile" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="8.0333968098958337" />
+          <ConnectorPoint PointX="7.5" PointY="8.0333968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="aspnetModel.UsersInRoles" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="11.3362939453125" />
+          <ConnectorPoint PointX="6" PointY="11.3362939453125" />
+          <ConnectorPoint PointX="6" PointY="8.6917936197916674" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="aspnetModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="0.75" Height="1.9802864583333317" />
+        <AssociationConnector Association="aspnetModel.FK_Trip_Users" >
+          <ConnectorPoint PointX="5.8125" PointY="5.75" />
+          <ConnectorPoint PointX="5.8125" PointY="4.3936979166666656" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="aspnetModel.TripType" Width="1.5" PointX="7.375" PointY="3.75" Height="1.5956835937499996" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
